@@ -38,6 +38,17 @@ extension Font {
 // MARK: - NewYork Font Extension
 
 extension Font {
+    /*
+     - newYork 폰트 생성
+     - Parameters:
+            - size: 폰트 크기 (CGFloat)
+     - Example:
+          ```swift
+            Text("Hello, world!")
+                .font(.newYork(size: 10))
+          ```
+    */
+    
     static func newYork(size: CGFloat) -> Font {
         return Font.custom("NewYorkLarge-Black", size: size)
     }

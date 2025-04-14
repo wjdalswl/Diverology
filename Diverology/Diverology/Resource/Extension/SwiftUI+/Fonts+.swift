@@ -25,11 +25,20 @@ extension Font {
             - size: 폰트 크기 (CGFloat)
      - Example:
           ```swift
-          let font = Font.pretendard(.bold, size: 16)
+            Text("Hello, world!")
+                .font(.pretendard(.bold, size: 10))
           ```
     */
 
     static func pretendard(_ type: PretendardType, size: CGFloat) -> Font {
         return Font.custom("Pretendard-" + type.rawValue, size: size)
+    }
+}
+
+// MARK: - NewYork Font Extension
+
+extension Font {
+    static func newYork(size: CGFloat) -> Font {
+        return Font.custom("NewYorkLarge-Black", size: size)
     }
 }

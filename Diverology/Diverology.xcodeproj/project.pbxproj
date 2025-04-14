@@ -29,9 +29,22 @@
 		2DE8D3672DAD191C009ED66C /* DiverologyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiverologyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2DE8D3C32DAD2C7C009ED66C /* Exceptions for "Diverology" folder in "Diverology" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2DE8D34C2DAD191A009ED66C /* Diverology */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2DE8D34F2DAD191A009ED66C /* Diverology */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2DE8D3C32DAD2C7C009ED66C /* Exceptions for "Diverology" folder in "Diverology" target */,
+			);
 			path = Diverology;
 			sourceTree = "<group>";
 		};
@@ -395,10 +408,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Diverology/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Diverology/Application/Preview Content\"";
 				DEVELOPMENT_TEAM = 3BFLHJ2HKG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Diverology/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -424,10 +438,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Diverology/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Diverology/Application/Preview Content\"";
 				DEVELOPMENT_TEAM = 3BFLHJ2HKG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Diverology/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

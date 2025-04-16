@@ -15,9 +15,9 @@ struct CustomTabBarView: View {
             ZStack {
                 switch selectedTab {
                 case .home:
-                    ContentView()
+                    HomeView()
                 case .list:
-                    ContentView()
+                    ListView()
                 case .mypage:
                     ContentView()
                 }

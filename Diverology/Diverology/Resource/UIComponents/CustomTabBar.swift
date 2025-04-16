@@ -23,32 +23,26 @@ struct CustomTabBar: View {
     ]
     
     var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(.white)
-                .opacity(0.3)
-                
-            HStack {
-                ForEach(tabs, id: \.0) { tab, imageName, label, imageSize in
-                    TabButton(
-                        isSelected: selectedTab == tab,
-                        imageName: imageName,
-                        label: label,
-                        imageSize: imageSize
-                    ) {
-                        withAnimation {
-                            selectedTab = tab
-                        }
-                    }
-                    if tab != tabs.last?.0 {
-                        Spacer()
+        HStack {
+            ForEach(tabs, id: \.0) { tab, imageName, label, imageSize in
+                TabButton(
+                    isSelected: selectedTab == tab,
+                    imageName: imageName,
+                    label: label,
+                    imageSize: imageSize
+                ) {
+                    withAnimation {
+                        selectedTab = tab
                     }
                 }
+                if tab != tabs.last?.0 {
+                    Spacer()
+                }
             }
-            .padding(.bottom, 30)
-            .padding(.horizontal, 53)
         }
         .frame(height: 87)
+        .padding(.init(horizontal: 53, bottom: 30))
+        .background(.white.opacity(0.3))
     }
 }
 
@@ -76,4 +70,13 @@ struct TabButton: View {
             .frame(width: 52, height: 38)
         }
     }
+}
+
+#Preview {
+    @Previewable
+    @State var selectedTab: BottomTab = .home
+    
+    CustomTabBar(
+        selectedTab: $selectedTab
+    )
 }

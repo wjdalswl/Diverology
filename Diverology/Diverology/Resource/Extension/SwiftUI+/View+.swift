@@ -19,6 +19,19 @@ extension View {
     ) -> some View {
         self.modifier(ProfileModifier(size: size))
     }
+    
+    func basicButtonStyle(
+        labelColor: Color = .white,
+        backgroundColor: Color = .blue
+    ) -> some View {
+        self.buttonStyle(
+            BasicButtonStyle(labelColor: labelColor, backgroundColor: backgroundColor)
+        )
+    }
+    
+    func imageCircleButtonStyle() -> some View {
+        self.buttonStyle(ImageCircleButtonStyle())
+    }
 }
 
 
@@ -47,5 +60,46 @@ struct ProfileModifier: ViewModifier {
                 x: 4,
                 y: 4
             )
+    }
+}
+
+
+// MARK: - ButtonStyle
+
+struct BasicButtonStyle: ButtonStyle {
+    var labelColor = Color.white
+    var backgroundColor = Color.blue
+    
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.label
+                .foregroundColor(labelColor)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 13)
+                .multilineTextAlignment(.center)
+        }
+        .background(backgroundColor.opacity(configuration.isPressed ? 0.7 : 1.0))
+        .cornerRadius(10)
+        .scaleEffect(configuration.isPressed ? 0.99 : 1.0)
+        .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+    }
+}
+
+struct ImageCircleButtonStyle: ButtonStyle {
+    var backgroundColor: Color = .blue900
+    var size: CGSize = CGSize(width: 23, height: 19)
+    var padding: EdgeInsets = EdgeInsets(horizontal: 4.5, vertical: 6.5)
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaledToFit()
+            .frame(width: size.width, height: size.height)
+            .padding(padding)
+            .background(
+                Circle()
+                    .fill(.blue900.opacity(configuration.isPressed ? 0.3 : 1.0))
+            )
+            .foregroundColor(.white)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
     }
 }

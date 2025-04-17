@@ -29,19 +29,7 @@ struct OnboardingView: View {
                 }
                 
                 FieldSection(title: "지원 분야") {
-                    HStack {
-                        ForEach(Position.allCases.indices, id: \..self) { i in
-                            PositionButton(
-                                position: Position.allCases[i],
-                                isSelected: selected == Position.allCases[i]
-                            ) {
-                                selected = Position.allCases[i]
-                            }
-                            if i != Position.allCases.count - 1 {
-                                Spacer()
-                            }
-                        }
-                    }
+                    PositionButtonsList(selected: $selected)
                 }
                 
                 FieldSection(title: "깃허브") {

@@ -51,19 +51,31 @@ struct PositionButton: View {
     }
 }
 
+struct PositionButtonsList: View {
+    @Binding var selected: Position
+    
+    var body: some View {
+        HStack {
+            ForEach(Position.allCases.indices, id: \.self) { i in
+                PositionButton(
+                    position: Position.allCases[i],
+                    isSelected: selected == Position.allCases[i]
+                ) {
+                    selected = Position.allCases[i]
+                }
+                if i != Position.allCases.count - 1 {
+                    Spacer()
+                }
+            }
+        }
+    }
+}
+
 
 #Preview {
     @Previewable
     @State var selected: Position = .domain
     
-    return HStack {
-        ForEach(Position.allCases, id: \.self) { position in
-            PositionButton(
-                position: position,
-                isSelected: selected == position
-            ) {
-                selected = position
-            }
-        }
-    }
+    PositionButtonsList(selected: $selected)
+        .padding(.horizontal, 20)
 }

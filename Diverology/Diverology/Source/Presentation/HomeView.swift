@@ -19,16 +19,14 @@ struct HomeView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .top) {
-                BackgroundImageView()
-                
+        VStack {
+            CustomNavigationBar(
+                showBackButton: false,
+                showLogo: true
+            )
+            
+            ScrollView(showsIndicators: false) {
                 VStack(spacing: 35) {
-                    CustomNavigationBar(
-                        showBackButton: false,
-                        showLogo: true
-                    )
-                    
                     NameDropCard(nickName: "My")
                         .padding(.horizontal, cardPadding)
                     
@@ -41,10 +39,10 @@ struct HomeView: View {
                         currentIndex: $currentIndex
                     )
                 }
-                .padding(.top, geometry.safeAreaInsets.top)
+                .padding(.init(horizontal: 20, bottom: 20))
             }
-            .ignoresSafeArea(edges: .all)
         }
+        .backgroundImage()
     }
 }
 

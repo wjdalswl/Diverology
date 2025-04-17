@@ -11,18 +11,15 @@ struct CustomTabBarView: View {
     @State private var selectedTab: BottomTab = .home
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            ZStack {
-                switch selectedTab {
-                case .home:
-                    HomeView()
-                case .list:
-                    ListView()
-                case .mypage:
-                    ContentView()
-                }
+        VStack(spacing: 0) {
+            switch selectedTab {
+            case .home:
+                HomeView()
+            case .list:
+                ListView()
+            case .mypage:
+                MyPageView()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             CustomTabBar(
                 selectedTab: $selectedTab

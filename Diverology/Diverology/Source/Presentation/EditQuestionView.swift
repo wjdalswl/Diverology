@@ -11,36 +11,29 @@ struct EditQuestionView: View {
     @State private var text: String = ""
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .top) {
-                BackgroundImageView()
-                
-                VStack {
-                    CustomNavigationBar(
-                        showBackButton: true,
-                        rightItem: AnyView(
-                            Button{
-                                print("저장 눌림")
-                            } label: {
-                                Text("저장")
-                                    .font(.pretendard(.bold, size: 20))
-                                    .foregroundColor(.blue800)
-                            }
-                        )
-                    )
-                    
-                    TextEditor(text: $text)
-                        .padding(.horizontal, 20)
-                        .foregroundColor(.blue900)
-                        .font(.pretendard(.regular, size: 20))
-                        .lineSpacing(5)
-                        .scrollContentBackground(.hidden)
-                        .background(.clear)
-                }
-                .padding(.top, geometry.safeAreaInsets.top)
-            }
-            .ignoresSafeArea(edges: .all)
+        VStack {
+            CustomNavigationBar(
+                showBackButton: true,
+                rightItem: AnyView(
+                    Button{
+                        print("저장 눌림")
+                    } label: {
+                        Text("저장")
+                            .font(.pretendard(.bold, size: 20))
+                            .foregroundColor(.blue800)
+                    }
+                )
+            )
+            
+            TextEditor(text: $text)
+                .padding(.horizontal, 20)
+                .foregroundColor(.blue900)
+                .font(.pretendard(.regular, size: 20))
+                .lineSpacing(5)
+                .scrollContentBackground(.hidden)
+                .background(.clear)
         }
+        .backgroundImage()
     }
 }
 

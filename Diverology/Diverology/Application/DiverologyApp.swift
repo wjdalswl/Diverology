@@ -11,7 +11,7 @@ import SwiftUI
 struct DiverologyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CustomTabBarView()
         }
     }
 }

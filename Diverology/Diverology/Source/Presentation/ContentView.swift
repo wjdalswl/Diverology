@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var selectedFlavor: String = ""
+    
     var body: some View {
         ZStack {
             Image(.imgBasicBackground)
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
-                
+            
             VStack {
                 Image(systemName: "globe")
                     .imageScale(.large)

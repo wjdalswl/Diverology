@@ -14,6 +14,10 @@ extension View {
         self.modifier(TitleTextModifier())
     }
     
+    func backgroundImage() -> some View {
+        self.modifier(BackgroundImageModifier())
+    }
+    
     func witProfileStyle(
         size: CGFloat = 136
     ) -> some View {
@@ -46,6 +50,18 @@ struct TitleTextModifier: ViewModifier {
 }
 
 // MARK: - Image
+
+struct BackgroundImageModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(
+                Image(.imgBasicBackground)
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+            )
+    }
+}
 
 struct ProfileModifier: ViewModifier {
     var size: CGFloat = 136

@@ -14,73 +14,60 @@ struct OnboardingView: View {
     @State private var instaText: String = ""
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .bottom) {
-                BackgroundImageView()
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 20) {
+                Text("프로필을 등록 해주세요!")
+                    .titleText()
+                    .padding(.top, 43)
                 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 20) {
-                        Text("프로필을 등록 해주세요!")
-                            .titleText()
-                            .padding(.top, 43)
-                        
-                        ProfileImageSelector()
-                        
-                        FieldSection(title: "닉네임") {
-                            CustomTextField(text: $nickNameText, placeholder: "ADA에서 사용하고 계신 닉네임을 입력해주세요.")
-                            SubText("자동으로 모두 대문자로 등록 됩니다.")
-                                .padding(.top, -4)
-                        }
-                        
-                        FieldSection(title: "지원 분야") {
-                            HStack {
-                                ForEach(Position.allCases.indices, id: \..self) { i in
-                                    PositionButton(
-                                        position: Position.allCases[i],
-                                        isSelected: selected == Position.allCases[i]
-                                    ) {
-                                        selected = Position.allCases[i]
-                                    }
-                                    if i != Position.allCases.count - 1 {
-                                        Spacer()
-                                    }
-                                }
+                ProfileImageSelector()
+                
+                FieldSection(title: "닉네임") {
+                    CustomTextField(text: $nickNameText, placeholder: "ADA에서 사용하고 계신 닉네임을 입력해주세요.")
+                    SubText("자동으로 모두 대문자로 등록 됩니다.")
+                        .padding(.top, -4)
+                }
+                
+                FieldSection(title: "지원 분야") {
+                    HStack {
+                        ForEach(Position.allCases.indices, id: \..self) { i in
+                            PositionButton(
+                                position: Position.allCases[i],
+                                isSelected: selected == Position.allCases[i]
+                            ) {
+                                selected = Position.allCases[i]
+                            }
+                            if i != Position.allCases.count - 1 {
+                                Spacer()
                             }
                         }
-                        
-                        FieldSection(title: "깃허브") {
-                            CustomTextField(
-                                text: $githubText,
-                                placeholder: "깃허브 아이디를 입력해주세요."
-                            )
-                        }
-                        
-                        FieldSection(title: "인스타") {
-                            CustomTextField(
-                                text: $instaText,
-                                placeholder: "인스타 아이디를 입력해주세요."
-                            )
-                        }
                     }
-                    .padding(
-                        .init(
-                            horizontal: 20,
-                            top: geometry.safeAreaInsets.top,
-                            bottom: 10
-                        )
+                }
+                
+                FieldSection(title: "깃허브") {
+                    CustomTextField(
+                        text: $githubText,
+                        placeholder: "깃허브 아이디를 입력해주세요."
                     )
                 }
-                .safeAreaInset(edge: .bottom) {
-                    Button("완료") {
-                        print("클릭됨")
-                    }
-                    .basicButtonStyle(labelColor: .white, backgroundColor: .semanticBlue600)
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, geometry.safeAreaInsets.bottom == 0 ? 150 : geometry.safeAreaInsets.bottom)
+                
+                FieldSection(title: "인스타") {
+                    CustomTextField(
+                        text: $instaText,
+                        placeholder: "인스타 아이디를 입력해주세요."
+                    )
                 }
             }
-            .ignoresSafeArea(edges: .all)
+            .padding(.init(horizontal: 20, bottom: 10))
         }
+        .safeAreaInset(edge: .bottom) {
+            Button("완료") {
+                print("클릭됨")
+            }
+            .basicButtonStyle(labelColor: .white, backgroundColor: .semanticBlue600)
+            .padding(.horizontal, 20)
+        }
+        .backgroundImage()
     }
 }
 

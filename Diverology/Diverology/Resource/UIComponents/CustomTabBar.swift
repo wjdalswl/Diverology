@@ -42,7 +42,12 @@ struct CustomTabBar: View {
         }
         .frame(height: 87)
         .padding(.init(horizontal: 53, bottom: 30))
-        .background(.white.opacity(0.3))
+        .background(
+            ZStack {
+                Color.blue500
+                Color.white.opacity(0.3)
+            }
+        )
     }
 }
 
@@ -76,7 +81,11 @@ struct TabButton: View {
     @Previewable
     @State var selectedTab: BottomTab = .home
     
-    CustomTabBar(
-        selectedTab: $selectedTab
-    )
+    return HStack {
+        CustomTabBar(
+            selectedTab: $selectedTab
+        )
+    }
+    .frame(maxHeight: .infinity)
+    .background(.blue500)
 }

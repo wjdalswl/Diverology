@@ -18,7 +18,7 @@ struct CustomTabBarView: View {
             case .list:
                 ListView()
             case .mypage:
-                MyPageView()
+                ProfileDetailView(viewType: .my)
             }
             
             CustomTabBar(

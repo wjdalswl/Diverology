@@ -1,67 +1,21 @@
 //
-//  MyPageView.swift
+//  SpecialInfoView.swift
 //  Diverology
 //
-//  Created by jeongminji on 4/15/25.
+//  Created by jeongminji on 4/18/25.
 //
 
 import SwiftUI
 
-struct MyPageView: View {
-    @State private var searchText: String = ""
-    @State private var isPressed = false
-    
-    private let questions = [
-        "제 닉네임 유래는 무엇일까요?",
-        "제 고향은 어디일까요?",
-        "제 목표는 무엇일까요?",
-        "제 닉네임 유래는 무엇일까요?",
-        "제 고향은 어디일까요?",
-        "제 목표는 무엇일까요?"
-    ]
-    
-    var body: some View {
-        VStack {
-            CustomNavigationBar(
-                showBackButton: false,
-                rightItem: AnyView(
-                    Button(
-                        action: { print("수정 눌림") }
-                    ) {
-                        Image(systemName: "square.and.pencil")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 23, height: 20)
-                            .foregroundColor(.blue800)
-                    }
-                )
-            )
-            
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 43) {
-                    ProfileView(nickName: "My", type: .basic)
-                    
-                    BasicInfoView(
-                        position: .tech,
-                        phoneNum: "010-0000-0000",
-                        githubId: "wjdalswl",
-                        instaId: "@pqrqpin2274"
-                    )
-                    
-                    SpecialInfoView(questions: questions)
-                }
-                .padding(.init(horizontal: 20, bottom: 20))
-            }
-            .frame(maxHeight: .infinity)
-        }
-        .backgroundImage()
-    }
+enum SpecialInfoType {
+    case myInfo
+    case otherInfo
 }
 
-// MARK: - Components
-
 struct SpecialInfoView: View {
+    var messageType: SpecialInfoType
     var questions: [String]
+    var answers: [String]? = nil
     
     var body: some View {
         VStack(spacing: 12) {
@@ -70,15 +24,34 @@ struct SpecialInfoView: View {
                 .font(.pretendard(.medium, size: 16))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text("상대와 나누고 싶은 대화나\n기억해줬으면 하는 내용을 질문으로 추가해주세요.")
-                .foregroundStyle(.gray400)
-                .font(.pretendard(.light, size: 13))
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            QuestionView(questions: questions)
+            switch messageType {
+            case .myInfo:
+                Text("상대와 나누고 싶은 대화나\n기억해줬으면 하는 내용을 질문으로 추가해주세요.")
+                    .foregroundStyle(.gray400)
+                    .font(.pretendard(.light, size: 13))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                QuestionView(questions: questions)
+                
+            case .otherInfo:
+                Rectangle()
+                    .foregroundStyle(.blue700)
+                    .frame(width: .infinity, height: 1)
+                
+                if let answers = answers {
+                    ForEach(0..<min(questions.count, answers.count), id: \.self) { index in
+                        VStack(spacing: 20) {
+                            ChatView(text: questions[index], messageType: .otherMessage)
+                            ChatView(text: answers[index], messageType: .myMessage)
+                        }
+                    }
+                }
+            }
         }
     }
 }
+
+// MARK: - Components
 
 struct QuestionView: View {
     @State var questions: [String]
@@ -178,6 +151,28 @@ struct QuestionItemView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
-    MyPageView()
+    let questions = [
+        "제 닉네임 유래는 무엇일까요?",
+        "제 고향은 어디일까요?"
+    ]
+    
+    let answers = [
+        "안알려줌",
+        "비밀이에요"
+    ]
+    
+    SpecialInfoView(messageType: .myInfo, questions: questions)
+        .padding()
+        .background(.blue500)
+        
+    SpecialInfoView(
+        messageType: .otherInfo,
+        questions: questions,
+        answers: answers
+    )
+        .padding()
+        .background(.blue500)
 }
